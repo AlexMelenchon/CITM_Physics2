@@ -24,7 +24,7 @@ private:
 
 public:
 	
-	vec3 X, Y, Z, Position, Reference, orbitRef;
+	vec3 X, Y, Z, Position, Reference, auxVec;
 
 private:
 

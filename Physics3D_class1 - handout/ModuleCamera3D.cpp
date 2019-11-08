@@ -75,40 +75,43 @@ update_status ModuleCamera3D::Update()
 		Move(X);
 	}
 
-
-	
 	// Mouse motion ----------------
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
-		orbitRef = Reference - Position;
 
-		normalize(orbitRef);
+		auxVec = Reference - Position;
 
-		rotate(orbitRef, dx,Y);
 
-		LookAt(orbitRef);
+		auxVec = rotate(auxVec, dx,Y);
+		auxVec = rotate(auxVec, dy, X);
+
+		normalize(auxVec);
+
+
+		LookAt(Position + auxVec);
 	}
 	else if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_UP)
 	{
-		orbitRef = { 0,0,0 };
+		auxVec = { 0,0,0 };
 	}
 
 	// Orbit motion ----------------
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
-		if (orbitRef.x == 0)
-			orbitRef = Reference;
+		if (auxVec.x == 0)
+			auxVec = Reference;
 
-		LookAt(orbitRef);
+		LookAt(auxVec);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	{
-		orbitRef = { 0,0,0 };
+		auxVec = { 0,0,0 };
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_REPEAT)
+	// Reset ---------------------
+	if (App->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 	{
 		LookAt({0.0f, 2.0f, 0.0f});
 		Position.x = 0.0f;

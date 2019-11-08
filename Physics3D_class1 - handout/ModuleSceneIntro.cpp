@@ -21,8 +21,6 @@ bool ModuleSceneIntro::Start()
 	// TODO 2: Place the camera one unit up in Y and one unit to the right
 	// experiment with different camera placements, then use LookAt()
 	// to make it look at the center
-
-
 	App->camera->Move({ 0.0f, 1.0f, 0.0f });
 
 
@@ -52,9 +50,6 @@ update_status ModuleSceneIntro::Update()
 
 	cyl1.Render();
 
-
-
-
 	// TODO 6: Draw a sphere of 0.5f radius around the center
 	// Draw somewhere else a cube and a cylinder in wireframe
 	Sphere sph2(0.5f);
@@ -71,4 +66,3 @@ update_status ModuleSceneIntro::Update()
 
 	return UPDATE_CONTINUE;
 }
-
